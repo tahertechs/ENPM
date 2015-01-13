@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password',60);
 			$table->rememberToken();
 			$table->boolean('confirmed')->default(0);
+			$table->enum('role', array('admin', 'student','teacher'));
 			$table->text('bio')->nullable();
 			$table->timestamps();
 		});
