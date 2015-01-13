@@ -23,8 +23,8 @@
                 {{Form::open(['route'=>'login','role'=>'form','class'=>'form-horizonatal'])}}
 
                 <div class="form-group">
-                    {{Form::label('email','E-mail Address')}}
-                    {{Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'','autocomplete'=>'off'])}}
+                    {{Form::label('username_or_email','Username or Email Address')}}
+                    {{Form::text('username_or_email', null, ['class'=>'form-control', 'placeholder'=>'','autocomplete'=>'off'])}}
                 </div>
 
                 <div class="form-group">

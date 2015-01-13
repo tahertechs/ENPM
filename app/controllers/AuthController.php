@@ -49,7 +49,7 @@ class AuthController extends \BaseController {
 	public function postLogin()
 	{
 		$rules = array(
-			'email'    => 'required|email',
+			'username_or_email'    => 'required',
 			'password' => 'required|min:3'
 		);
 
@@ -61,8 +61,10 @@ class AuthController extends \BaseController {
 
 		} else {
 
+			$field = filter_var(Input::get('username_or_email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
 			$credentials = array(
-				'email'     => Input::get('email'),
+				$field      => Input::get('username_or_email'),
 				'password'  => Input::get('password')
 			);
 
@@ -76,7 +78,7 @@ class AuthController extends \BaseController {
 			else{
 
 				Session::flash('notifyError','Something Weired happen..Try Again Later!');
-				return Redirect::intended('/');
+				return Redirect::route('login');
 			}
 		}
 
