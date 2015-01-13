@@ -1,9 +1,14 @@
 <?php
 
+#Home Route
 Route::get('/','HomeController@index');
 
-Route::get('/env',function(){
+ #Authentication Routes
+Route::get('login',['as'=>'login','uses'=>'AuthController@getLogin']);
+Route::post('login',['as'=>'login','uses'=>'AuthController@postLogin']);
+Route::get('register',['as'=>'register','uses'=>'AuthController@getRegister']);
+Route::post('register',['as'=>'register','uses'=>'AuthController@postRegister']);
+Route::controller('password', 'RemindersController');
 
-    dd( getenv('DB_HOST'));
-	//return App::environment();
-});
+#Users control Route
+Route::resource('users','UsersController');
