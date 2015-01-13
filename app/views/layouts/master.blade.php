@@ -5,7 +5,7 @@
     <title>ENPM - Erciyes Not Paylasim Merkezi</title>
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">--}}
     {{--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>--}}
-    {{--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">--}}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.css')}}"/>
     <link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css')}}"/>
     <style>
@@ -31,20 +31,27 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#about">Support</a></li>
                     <li><a href="#contact">FAQ</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">members <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{URL::route('login')}}">Login</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{URL::route('register')}}">Register</a></li>
-                        </ul>
-                    </li>
+                    @if(!Auth::check())
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">members <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{URL::route('login')}}">Login</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{URL::route('register')}}">Register</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li><a href="{{URL::route('logout')}}">Logout</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
     </nav>
 
+    @include('partials.notify')
+
     @yield('content')
+
 
 
     <script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
