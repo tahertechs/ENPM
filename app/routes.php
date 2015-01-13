@@ -25,3 +25,9 @@ Route::get('test',function(){
  dd($user->username);
 
 });
+
+Route::get('env',function(){
+
+ //dd(getenv('env'));
+ dd(App::environment());
+});
