@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->string('password',60);
 			$table->rememberToken();
-			$table->tinyInteger('activated')->default(0);
+			$table->boolean('confirmed')->default(0);
 			$table->text('bio')->nullable();
 			$table->timestamps();
 		});

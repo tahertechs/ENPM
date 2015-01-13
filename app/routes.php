@@ -12,22 +12,3 @@ Route::controller('password', 'RemindersController');
 
 #Users control Route
 Route::resource('users','UsersController');
-
-Route::get('test',function(){
-
- $user = new User;
- $user->username = 'test';
- $user->email = 'test1';
- $user->name = 'test NSE';
- $user->password = Hash::make('taher');
- $user->save();
-
- dd($user->username);
-
-});
-
-Route::get('env',function(){
-
- dd(getenv('DB_NAME').'==='.getenv('DB_HOST').'==='.getenv('DB_USERNAME'));
-
-});
