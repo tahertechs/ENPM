@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local'      => array('Core'),
-    'production' => array('104.236.64.185'),
+    'production' => array('188.166.31.192'),
 
 ));
 
