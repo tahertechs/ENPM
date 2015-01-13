@@ -28,6 +28,6 @@ Route::get('test',function(){
 
 Route::get('env',function(){
 
- //dd(getenv('env'));
- dd(App::environment());
+ dd(getenv('DB_NAME').'==='.getenv('DB_HOST').'==='.getenv('DB_USERNAME'));
+
 });
