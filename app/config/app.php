@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'Q5BD2cG1ykuokTxKGiqZ8oEvXH0T9PlG',
+	'key' => '2JKM4lbkSXoLgazYLEjrZ1FuzU8AvFa2',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -121,8 +121,9 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider',
-
+		'Laracasts\Flash\FlashServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider',
+		//'Way\Generators\GeneratorsServiceProvider',
 
 	),
 
@@ -190,6 +191,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+		'Flash'				=> 'Laracasts\Flash\Flash',
+		'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 
 	),
 

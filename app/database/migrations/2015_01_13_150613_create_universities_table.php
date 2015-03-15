@@ -16,8 +16,7 @@ class CreateUniversitiesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('city_id')->unsigned();
-			$table->foreign('city_id')->references('city_id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
-			$table->string('name',70);
+			$table->string('name');
 			$table->string('address');
 			$table->timestamps();
 		});

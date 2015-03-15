@@ -5,13 +5,10 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.*"
+		"laravel/framework": "4.2.*",
+		"laracasts/flash": "~1.2",
+		"artdarek/oauth-4-laravel": "dev-master"
 	},
-
-	"require-dev": {
-	  "way/generators": "~2.0"
-	},
-
 	"autoload": {
 		"classmap": [
 			"app/commands",

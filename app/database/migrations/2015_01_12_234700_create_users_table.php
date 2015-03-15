@@ -23,6 +23,17 @@ class CreateUsersTable extends Migration {
 			$table->boolean('confirmed')->default(0);
 			$table->enum('role', array('admin', 'student','teacher'))->default('student');
 			$table->text('bio')->nullable();
+			
+			$table->string('facebook')->nullable();
+			$table->string('google')->nullable();
+			$table->string('twitter')->nullable();
+			$table->string('instagram')->nullable();
+			$table->string('linkedin')->nullable();
+
+			$table->integer('university_id');
+			$table->integer('faculty_id');
+			$table->integer('department_id');
+			
 			$table->timestamps();
 		});
 	}

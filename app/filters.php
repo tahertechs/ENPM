@@ -43,10 +43,18 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			Flash::message('You are almost there , Just Login To Continue...');
+			return Redirect::intended('/');
 		}
 	}
 });
+
+
+Route::filter('admin', function()
+{
+	if (!Auth::user() || Auth::user()->role != 'admin') return Redirect::home();
+});
+
 
 
 Route::filter('auth.basic', function()

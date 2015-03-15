@@ -2,16 +2,26 @@
 
 class AuthController extends \BaseController {
 
-	public function getRegister()
-	{
-		return View::make('auth.register');
+	public function __construct(){
+
+        //$this->beforeFilter('guest', array('except' => 'getLogin'));
+
+        $this->beforeFilter('csrf', array('on' => 'post'));
+
+
 	}
 
 
 	public function postRegister()
 	{
+		if(Auth::check()){
+
+			Flash::message('Cikis Yapmadan Yeni kayit Yapamazsiniz....Once Cikis yap oyle devam et. Hadi yuru git... ');
+
+			return Redirect::to('/');
+		}
+
 		$rules = array(
-			'name'=>'required|min:3',
 			'username'=>'required|min:3|unique:users',
 			'email'=>'required|email|unique:users',
 			'password'=> 'required|min:3',
@@ -23,31 +33,34 @@ class AuthController extends \BaseController {
 		if ($validator->passes()) {
 
 			$user = new User;
-			$user->name = Input::get('name');
 			$user->username = Input::get('username');
 			$user->email = Input::get('email');
 			$user->password = Hash::make(Input::get('password'));
 			$user->remember_token = Input::get('_token');
 			$user->save();
 
-			Session::flash('message','Successifully Registered...!Login Now!');
+			Flash::success('Successifully Registered...! Login Now!');
 
-			return Redirect::route('login');
+			return Redirect::to('/');
 		}
 		else {
-			return Redirect::route('register')->withInput()->withErrors($validator);
+
+			return Redirect::to('/')->withInput()->withErrors($validator);
 		}
 
 	}
 
-
-	public function getLogin()
-	{
-		return View::make('auth.login');
-	}
 
 	public function postLogin()
 	{
+
+		if(Auth::check()){
+
+			Flash::message('Zaten giris yapmissindir , Niye ugrasiyorsunuzki ? SITEYE GIR butona tiklasana ');
+
+			return Redirect::to('/');
+		}
+
 		$rules = array(
 			'username_or_email'    => 'required',
 			'password' => 'required|min:3'
@@ -55,9 +68,9 @@ class AuthController extends \BaseController {
 
 		$validator = Validator::make(Input::all(), $rules);
 
-		if ($validator->fails()) {
+		if ($validator->fails()) {		
 
-			return Redirect::route('login')->withInput()->withErrors($validator);
+			return Redirect::back()->withInput()->withErrors($validator);
 
 		} else {
 
@@ -70,15 +83,15 @@ class AuthController extends \BaseController {
 
 			if (Auth::attempt($credentials))
 			{
+				Flash::success('Welcome Aboard...'. Auth::user()->email);
 
-				Session::flash('notifySuccess','Welcome Aboard...'. Auth::user()->email);
-
-				return Redirect::intended('/');
+				return Redirect::intended('home');
 			}
 			else{
 
-				Session::flash('notifyError','Something Weired happen..Try Again Later!');
-				return Redirect::route('login');
+				Flash::error('Password or Email is not correct, Try Again Later..');
+
+				return Redirect::to('/');
 			}
 		}
 
@@ -87,7 +100,10 @@ class AuthController extends \BaseController {
 	public function getLogout()
 	{
 		Auth::logout();
-		return Redirect::to('/');
+
+		Flash::message('Hope to see you soon , Don forget to like our page'); 
+
+		return Redirect::route('home');
 	}
 
 
